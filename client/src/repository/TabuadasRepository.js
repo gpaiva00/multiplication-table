@@ -1,5 +1,5 @@
 import axios from 'axios'
-const route = process.env.ENVIRONMENT == 'production' ? process.env.VUE_APP_API_PRODUCTION : process.env.VUE_APP_API_URL
+const route = 'http://gpaiva00.pythonanywhere.com'
 
 export default {
   checkApi: async () => axios.get(route+'/ping').then(res => res.data),
