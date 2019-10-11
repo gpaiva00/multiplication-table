@@ -1,0 +1,46 @@
+[
+  {
+    "_id": "5d98ddb0c5d0c10017fa02a0",
+    "name": "gab",
+    "username": "gabfp",
+    "password": "123456",
+    "score": 10,
+    "id": "2",
+    "_createdOn": "2019-10-05T18:15:12.300Z",
+    "_updatedOn": "2019-10-11T16:48:21.351Z"
+  },
+  {
+    "_id": "5d9a250ce682210017d1c97a",
+    "name": "gabriel paiva",
+    "username": "gabzinho",
+    "password": "123456",
+    "score": 9,
+    "_createdOn": "2019-10-06T17:31:56.254Z",
+    "_updatedOn": "2019-10-11T16:29:05.447Z"
+  },
+  {
+    "_id": "5d986b89c5d0c10017fa0274",
+    "name": "zica Do Mato",
+    "username": "Zicado mato35",
+    "password": "#12345",
+    "score": 0,
+    "id": "2",
+    "_createdOn": "2019-10-05T10:08:09.380Z"
+  },
+  {
+    "_id": "5d9a928de682210017d1cb0e",
+    "name": "gabriel paiva",
+    "username": "gabrielpaiva",
+    "password": "123456",
+    "score": 0,
+    "_createdOn": "2019-10-07T01:19:09.293Z"
+  },
+  {
+    "_id": "5d9a935ae682210017d1cb0f",
+    "name": "Jorge benjor",
+    "username": "jorge_123",
+    "password": "1234567",
+    "score": 0,
+    "_createdOn": "2019-10-07T01:22:34.382Z"
+  }
+]
