@@ -1,2 +1,5 @@
 #node modules
 client/node_modules
+
+#python env
+serve/env
