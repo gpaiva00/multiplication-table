@@ -6,7 +6,7 @@ import pymongo
 DEBUG = True
 API_URL = 'https://jsonbox.io/box_f1b3750f0856cf59314d'
 
-client = pymongo.MongoClient("mongodb+srv://aprenda-db:aprendadb170698@cluster-aprenda-8hiin.mongodb.net/aprenda?retryWrites=true&w=majority")
+
 db = client.aprenda
 collection = db['player']
 
