@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
+      <v-toolbar-title class="title text-uppercase">
         <span>Tabuadas</span>
         <!-- <span class="font-weight-light">FOLIO</span> -->
       </v-toolbar-title>
@@ -26,7 +26,7 @@
       </v-btn>
     </v-app-bar>
 
-    <div style="height: 570px;">
+    <v-container style="height: 570px;">
       <transition name="slide-fade" mode="out-in">
         <!-- Game -->
         <MainCard v-if="!showLogin" @gameOver="gameOver" class="mt-5"/>
@@ -41,7 +41,7 @@
           <v-icon v-else dark>fas fa-chevron-up</v-icon>
         </v-btn>
       </div> -->
-    </div>
+    </v-container>
     <!-- Ranking -->
     <Ranking @refresh="getPlayersList" class="mt-12" :players="playersList" :loading="rankingLoading" :isLoggedIn="isLoggedIn" :username="loggedUsernameAccount" />
 
@@ -207,6 +207,7 @@ export default {
 <style>
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
