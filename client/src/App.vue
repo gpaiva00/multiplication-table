@@ -10,8 +10,18 @@
          <v-avatar color="indigo" size="36">
           <v-icon class="white--text" dark>fa fa-user</v-icon>
         </v-avatar>
-        <span class="mr-2 ml-2 text-capitalize">{{ userName }}</span>
-        <v-icon  @click="logout" class="red--text ml-4 mr-3 lighten-1" size="20">fas fa-power-off</v-icon>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <span v-on="on" @click="() => { showProfile = true; showLogin = false }" class="mr-2 ml-2 text-capitalize">{{ getFirstName }}</span>
+          </template>
+          <span>Perfil</span>
+        </v-tooltip>
+        <v-tooltip bottom>
+          <template v-slot:activator="{on}">
+            <v-icon v-on="on"  @click="logout" class="red--text ml-4 mr-3 lighten-1" size="20">fas fa-power-off</v-icon>
+          </template>
+          <span>Sair</span>
+        </v-tooltip>
       </div>
       <v-btn v-else text>
         <!-- play or login -->
@@ -29,9 +39,11 @@
     <v-container style="height: 570px;">
       <transition name="slide-fade" mode="out-in">
         <!-- Game -->
-        <MainCard v-if="!showLogin" @gameOver="gameOver" class="mt-5"/>
+        <MainCard v-if="!showLogin && !showProfile" @gameOver="gameOver" class="mt-5"/>
         <!-- login/account -->
-        <LoginCard v-else @loginIn="loginIn" @invalidLogin="invalidLogin" @createAccount="createAccount" class="mt-5" :players="playersList"/>
+        <LoginCard v-else-if="showLogin" @loginIn="loginIn" @invalidLogin="invalidLogin" @createAccount="createAccount" class="mt-5" :players="playersList"/>
+        <!-- Profile -->
+        <Profile v-if="showProfile" @hideProfile="() => { showProfile = false; showLogin = false;}"  :data="loggedPlayer" />
       </transition>
 
       <!-- scroll down button -->
@@ -69,18 +81,21 @@ import MainCard from './components/MainCard'
 import Ranking from './components/Ranking'
 import LoginCard from './components/LoginCard'
 import TabuadasRepository from './repository/TabuadasRepository'
+import Profile from './components/Profile'
 
 export default {
   components: {
     MainCard,
     Ranking,
-    LoginCard
+    LoginCard,
+    Profile
   },
   mounted() {
     this.load()
   },
   data: () => ({
     showLogin: false,
+    showProfile: false,
     isLoggedIn: false,
     rankingLoading: true,
     scrolledToRanking: false,
@@ -153,6 +168,10 @@ export default {
         return this.getPlayersList()
       }
     },
+    showProfileCard() {
+      this.showLogin = false
+      this.showProfile = true
+    },
     loginIn({player, alreadyLoggedIn}) {      
       const { name, username, password, score } = player || {}
       
@@ -180,7 +199,8 @@ export default {
       this.isLoggedIn = false
       this.userName = ''
 
-
+      this.showLogin = true
+      this.showProfile = false
     },
     invalidLogin() {
       this.toggleSnack({
@@ -201,7 +221,12 @@ export default {
     toggleSnack(data) {
       this.snack = data
     }
-  }  
+  },
+  computed: {
+    getFirstName() {
+      return this.userName.split(' ')[0]
+    }
+  }
 }
 </script>
 <style>
