@@ -57,6 +57,7 @@
     <!-- Ranking -->
     <Ranking @refresh="getPlayersList" class="mt-12" :players="playersList" :loading="rankingLoading" :isLoggedIn="isLoggedIn" :username="loggedUsernameAccount" />
 
+    <Footer />
     <!-- snackbar -->
     <div class="text-center ma-2">
       <v-snackbar
@@ -82,13 +83,15 @@ import Ranking from './components/Ranking'
 import LoginCard from './components/LoginCard'
 import TabuadasRepository from './repository/TabuadasRepository'
 import Profile from './components/Profile'
+import Footer from './components/Footer'
 
 export default {
   components: {
     MainCard,
     Ranking,
     LoginCard,
-    Profile
+    Profile,
+    Footer
   },
   mounted() {
     this.load()
