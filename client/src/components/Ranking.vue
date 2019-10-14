@@ -21,6 +21,7 @@
             <th class="text-left">Nome</th>
             <th class="text-left">Username</th>
             <th class="text-left">Pontos</th>
+            <th class="text-left">Nível</th>
           </tr>
         </thead>
         <tbody>
@@ -29,6 +30,7 @@
             <td class="text-left">{{ item.name }}</td>
             <td class="text-left">{{ item.username }}</td>
             <td class="text-left">{{ item.score }}</td>
+            <td class="text-left">{{ item.difficult }}</td>
           </tr>
         </tbody>
       </template>

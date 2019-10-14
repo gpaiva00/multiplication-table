@@ -67,7 +67,6 @@ export default {
     correctAnswer: 0,
     selectedRounds: 0,
     timerWidth: 100,
-    maxOptionsAnswers: 3,
     gameIsRunnig: false,
     timerColor: 'deep-purple accent-4',
     optionColor: 'secondary',
@@ -75,9 +74,7 @@ export default {
     roundsOptions: [5, 10, 20, 40],
     gameSettings: {
       timerSpeed: 800,
-      // TODO: on load method, according to difficult, loop and array 1 to maxOptionsAnswers.
-      positions: [1, 2], 
-      maxOptionsAnswers: 2,
+      positions: [1, 2],
       range1: 1,
       range2: 10  
     }
@@ -91,33 +88,28 @@ export default {
         case 'Fácil':
           gameSettings.timerSpeed = 800
           gameSettings.positions = [1,2]
-          gameSettings.maxOptionsAnswers = 2
           break;
         case 'Médio':
-          gameSettings.timerSpeed = 500
+          gameSettings.timerSpeed = 800
           gameSettings.positions = [1,2,3]
-          gameSettings.maxOptionsAnswers = 3
           break;
         case 'Difícil':
           gameSettings.timerSpeed = 500
-          gameSettings.positions = [1,2,3,4]
-          gameSettings.maxOptionsAnswers = 4
-          gameSettings.range1 = 7
-          gameSettings.range2 = 90
+          gameSettings.positions = [1,2,3]
+          gameSettings.range1 = 2
+          gameSettings.range2 = 15
           break;
         case 'Jedi':
-          gameSettings.timerSpeed = 300
+          gameSettings.timerSpeed = 500
           gameSettings.positions = [1,2,3,4]
-          gameSettings.maxOptionsAnswers = 4
-          gameSettings.range1 = 7
-          gameSettings.range2 = 90
+          gameSettings.range1 = 2
+          gameSettings.range2 = 20
           break;
         case 'Super Jedi':
           gameSettings.timerSpeed = 300
           gameSettings.positions = [1,2,3,4]
-          gameSettings.maxOptionsAnswers = 4
-          gameSettings.range1 = 11
-          gameSettings.range2 = 150
+          gameSettings.range1 = 2
+          gameSettings.range2 = 30
           break;
       }
 
@@ -144,7 +136,7 @@ export default {
     },
 
     refreshAll() {
-      const {selectedRounds, generateRandomNumber, generateOtherOptions, refreshTable, gameSettings: { maxOptionsAnswers, positions } } = this
+      const {selectedRounds, generateRandomNumber, generateOtherOptions, refreshTable, gameSettings: { positions } } = this
 
       if(this.currentRound == selectedRounds) return this.gameOver()
 
@@ -152,14 +144,13 @@ export default {
       this.resetTimer()
 
       const product = refreshTable()
-      const randomPosition = generateRandomNumber(1, maxOptionsAnswers)
+      const randomPosition = generateRandomNumber(1, positions.length)
       let optionsItems = []
       
       this.correctAnswer = product
 
       // set result into random position
       optionsItems[randomPosition] = product
-      // setting other options like this:
       // table: 4x3. Other options get 4x2 and 4x4 to show approximate values
       let signal = -1
       // set other options into their positions
