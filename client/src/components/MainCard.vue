@@ -49,6 +49,15 @@ import Timer from './Timer'
 import OptionsList from './OptionsList'
 
 export default {
+  props: {
+    loggedPlayer: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  mounted() {
+    this.load()
+  },
   data: () => ({
     number1: 0,
     number2: 0,
@@ -63,11 +72,57 @@ export default {
     timerColor: 'deep-purple accent-4',
     optionColor: 'secondary',
     optionsItems: [],
-    positions: [1, 2, 3],
-    roundsOptions: [5, 10, 20, 40]
+    roundsOptions: [5, 10, 20, 40],
+    gameSettings: {
+      timerSpeed: 800,
+      // TODO: on load method, according to difficult, loop and array 1 to maxOptionsAnswers.
+      positions: [1, 2], 
+      maxOptionsAnswers: 2,
+      range1: 1,
+      range2: 10  
+    }
   }),
   methods: {
+    load() {
+      // set game settings according to user difficult
+      const gameSettings = {...this.gameSettings}
 
+      switch (this.loggedPlayer.difficult) {
+        case 'Fácil':
+          gameSettings.timerSpeed = 800
+          gameSettings.positions = [1,2]
+          gameSettings.maxOptionsAnswers = 2
+          break;
+        case 'Médio':
+          gameSettings.timerSpeed = 500
+          gameSettings.positions = [1,2,3]
+          gameSettings.maxOptionsAnswers = 3
+          break;
+        case 'Difícil':
+          gameSettings.timerSpeed = 500
+          gameSettings.positions = [1,2,3,4]
+          gameSettings.maxOptionsAnswers = 4
+          gameSettings.range1 = 7
+          gameSettings.range2 = 90
+          break;
+        case 'Jedi':
+          gameSettings.timerSpeed = 300
+          gameSettings.positions = [1,2,3,4]
+          gameSettings.maxOptionsAnswers = 4
+          gameSettings.range1 = 7
+          gameSettings.range2 = 90
+          break;
+        case 'Super Jedi':
+          gameSettings.timerSpeed = 300
+          gameSettings.positions = [1,2,3,4]
+          gameSettings.maxOptionsAnswers = 4
+          gameSettings.range1 = 11
+          gameSettings.range2 = 150
+          break;
+      }
+
+      this.gameSettings = gameSettings
+    },
     setSelectedAnswer(answer) {
       const { correctAnswer, timer } = this
 
@@ -89,7 +144,7 @@ export default {
     },
 
     refreshAll() {
-      const {selectedRounds, maxOptionsAnswers, generateRandomNumber, refreshTable, positions } = this
+      const {selectedRounds, generateRandomNumber, refreshTable, gameSettings: { maxOptionsAnswers, positions } } = this
 
       if(this.currentRound == selectedRounds) return this.gameOver()
 
@@ -107,11 +162,11 @@ export default {
       // set other options into their positions
       positions.forEach(i => {
         if (i === randomPosition) return
-        const random = generateRandomNumber(1, 30)
+        const random = generateRandomNumber()
         // prevent same option twice
         optionsItems[i] = !optionsItems.includes(random) 
           ? random 
-          : generateRandomNumber(1, 30) // or 1, 100
+          : generateRandomNumber() // or 1, 100
       })
       // remove null options
       optionsItems = optionsItems.filter(i => i != null)
@@ -149,7 +204,7 @@ export default {
 
     },
 
-    generateRandomNumber(init = 1, limit = 10) {
+    generateRandomNumber(init = this.gameSettings.range1, limit = this.gameSettings.range2) {
       return Math.floor(Math.random() * limit + init)
     },
 
@@ -177,7 +232,7 @@ export default {
 
         this.timer = setTimeout(() => {
           this.resetProgressBar(timeleft - 1, timetotal)
-        }, 500)
+        }, this.gameSettings.timerSpeed)
       }
 
       if (progressBarWidth <= 30)

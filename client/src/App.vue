@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app>
       <v-toolbar-title class="title text-uppercase">
-        <span>Tabuadas</span>
+        <span>Aprenda</span>
         <!-- <span class="font-weight-light">FOLIO</span> -->
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -39,7 +39,7 @@
     <v-container style="height: 570px;">
       <transition name="slide-fade" mode="out-in">
         <!-- Game -->
-        <MainCard v-if="!showLogin && !showProfile" @gameOver="gameOver" class="mt-5"/>
+        <MainCard v-if="!showLogin && !showProfile" @gameOver="gameOver" :loggedPlayer="loggedPlayer" class="mt-5"/>
         <!-- login/account -->
         <LoginCard v-else-if="showLogin" @loginIn="loginIn" @invalidLogin="invalidLogin" @createAccount="createAccount" class="mt-5" :players="playersList"/>
         <!-- Profile -->
@@ -99,7 +99,6 @@ export default {
     isLoggedIn: false,
     rankingLoading: true,
     scrolledToRanking: false,
-    userName: '',
     loggedUsernameAccount: '',
     playersList: [],
     loggedPlayer: {},
@@ -175,7 +174,7 @@ export default {
         // update only necessary keys 
         Object.keys(data).forEach(key => player[key] = data[key])
         // update username
-        this.userName = data.name
+        this.loggedPlayer = player
         
         await TabuadasRepository.updatePlayer(player._id, player)
         
@@ -196,12 +195,11 @@ export default {
       }
     },
     loginIn({player, alreadyLoggedIn}) {      
-      const { _id, name, username, password, score } = player || {}
+      const { _id, name, username, password, score, difficult = '' } = player || {}
       
       this.showLogin = false
       this.isLoggedIn = true
       this.loggedPlayer = player
-      this.userName = alreadyLoggedIn ? localStorage.getItem('name') : name
       this.loggedUsernameAccount = username
 
       // save local storage
@@ -210,6 +208,7 @@ export default {
         localStorage.setItem('name', name)
         localStorage.setItem('username', username)
         localStorage.setItem('password', password)
+        localStorage.setItem('difficult', difficult)
         localStorage.setItem('score', score)
       }
     },
@@ -221,7 +220,7 @@ export default {
       localStorage.removeItem('score')
 
       this.isLoggedIn = false
-      this.userName = ''
+      this.loggedPlayer = {}
 
       this.showLogin = true
       this.showProfile = false
@@ -248,7 +247,7 @@ export default {
   },
   computed: {
     getFirstName() {
-      return this.userName.split(' ')[0]
+      return this.loggedPlayer.name.split(' ')[0]
     }
   }
 }
