@@ -165,6 +165,7 @@ export default {
       if(this.isLoggedIn) {
         const player = this.loggedPlayer
         player.score = score
+        player.difficult = localStorage.getItem('difficult')
 
         await TabuadasRepository.updatePlayer(player._id, player)
         return this.getPlayersList()

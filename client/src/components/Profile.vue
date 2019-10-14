@@ -69,9 +69,10 @@ export default {
     handleSaveProfile() {
       this.$emit('saveProfile', {
         _id: this.data._id,
-        name: this.name,
-        difficult: this.selectedDiffiultLevel
+        name: this.name
       })
+
+      localStorage.setItem('difficult', this.selectedDiffiultLevel)
     }
   },
 

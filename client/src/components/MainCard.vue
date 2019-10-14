@@ -84,7 +84,7 @@ export default {
       // set game settings according to user difficult
       const gameSettings = {...this.gameSettings}
 
-      switch (this.loggedPlayer.difficult) {
+      switch (this.getUserDifficult) {
         case 'Fácil':
           gameSettings.timerSpeed = 800
           gameSettings.positions = [1,2]
@@ -274,6 +274,9 @@ export default {
   computed: {
     countDown() {
       return (this.selectedRounds - this.currentRound) + 1
+    },
+    getUserDifficult() {
+      return localStorage.getItem('difficult')
     }
   },
   components: {
