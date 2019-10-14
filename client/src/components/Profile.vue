@@ -55,9 +55,9 @@ export default {
   },
   data: () => ({
     name: '',
+    selectedDiffiultLevel: '',
     valid: false,
     difficultLevels: ['Fácil', 'Médio', 'Difícil', 'Jedi'],
-    selectedDiffiultLevel: '',
     nameRules: [v => !!v || "Digite seu nome"],
   }),
 
@@ -66,7 +66,13 @@ export default {
       this.name = this.data.name
       this.selectedDiffiultLevel = this.data.difficult || ''
     },
-    handleSaveProfile() {}
+    handleSaveProfile() {
+      this.$emit('saveProfile', {
+        _id: this.data._id,
+        name: this.name,
+        difficult: this.selectedDiffiultLevel
+      })
+    }
   },
 
   computed: {}

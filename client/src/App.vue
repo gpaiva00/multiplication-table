@@ -43,7 +43,7 @@
         <!-- login/account -->
         <LoginCard v-else-if="showLogin" @loginIn="loginIn" @invalidLogin="invalidLogin" @createAccount="createAccount" class="mt-5" :players="playersList"/>
         <!-- Profile -->
-        <Profile v-if="showProfile" @hideProfile="() => { showProfile = false; showLogin = false;}"  :data="loggedPlayer" />
+        <Profile v-if="showProfile" @saveProfile="saveProfile" @hideProfile="() => { showProfile = false; showLogin = false;}"  :data="loggedPlayer" />
       </transition>
 
       <!-- scroll down button -->
@@ -168,12 +168,35 @@ export default {
         return this.getPlayersList()
       }
     },
-    showProfileCard() {
-      this.showLogin = false
-      this.showProfile = true
+    async saveProfile(data) {
+      const player = this.playersList.find(p => p._id == data._id)
+
+      try {
+        // update only necessary keys 
+        Object.keys(data).forEach(key => player[key] = data[key])
+        // update username
+        this.userName = data.name
+        
+        await TabuadasRepository.updatePlayer(player._id, player)
+        
+        this.toggleSnack({
+          show: true,
+          text: 'Perfil atualizado com sucesso!',
+          timeout: 3000,
+          color: 'success'
+        })
+        
+      } catch (error) {
+        this.toggleSnack({
+          show: true,
+          text: 'Desculpe, deu erro ao tentar salvar :(',
+          timeout: 3000,
+          color: 'error'
+        })
+      }
     },
     loginIn({player, alreadyLoggedIn}) {      
-      const { name, username, password, score } = player || {}
+      const { _id, name, username, password, score } = player || {}
       
       this.showLogin = false
       this.isLoggedIn = true
@@ -183,6 +206,7 @@ export default {
 
       // save local storage
       if(!alreadyLoggedIn) {
+        localStorage.setItem('_id', _id)
         localStorage.setItem('name', name)
         localStorage.setItem('username', username)
         localStorage.setItem('password', password)
