@@ -1,5 +1,5 @@
 <template>
-  <v-card width="400" class="mx-auto">
+  <v-card width="400" class="mx-auto mt-12">
     <v-card-title>
       <v-badge class="mx-auto" color="purple" left>
         <template v-slot:badge>

@@ -39,11 +39,11 @@
     <v-container style="height: 570px;">
       <transition name="slide-fade" mode="out-in">
         <!-- Game -->
-        <MainCard v-if="!showLogin && !showProfile" @gameOver="gameOver" :loggedPlayer="loggedPlayer" class="mt-5"/>
+        <MainCard v-if="!showLogin && !showProfile" @gameOver="gameOver" :loggedPlayer="loggedPlayer"/>
         <!-- login/account -->
-        <LoginCard v-else-if="showLogin" @loginIn="loginIn" @invalidLogin="invalidLogin" @createAccount="createAccount" class="mt-5" :players="playersList"/>
+        <LoginCard v-else-if="showLogin" @loginIn="loginIn" @invalidLogin="invalidLogin" @createAccount="createAccount" :players="playersList"/>
         <!-- Profile -->
-        <Profile v-if="showProfile" @saveProfile="saveProfile" @hideProfile="() => { showProfile = false; showLogin = false;}"  :data="loggedPlayer" />
+        <Profile v-if="showProfile" @saveProfile="saveProfile" @hideProfile="() => { showProfile = false; showLogin = false;}" :data="loggedPlayer" />
       </transition>
 
       <!-- scroll down button -->
