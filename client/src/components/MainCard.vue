@@ -144,7 +144,7 @@ export default {
     },
 
     refreshAll() {
-      const {selectedRounds, generateRandomNumber, refreshTable, gameSettings: { maxOptionsAnswers, positions } } = this
+      const {selectedRounds, generateRandomNumber, generateOtherOptions, refreshTable, gameSettings: { maxOptionsAnswers, positions } } = this
 
       if(this.currentRound == selectedRounds) return this.gameOver()
 
@@ -159,14 +159,25 @@ export default {
 
       // set result into random position
       optionsItems[randomPosition] = product
+      // setting other options like this:
+      // table: 4x3. Other options get 4x2 and 4x4 to show approximate values
+      let signal = -1
       // set other options into their positions
-      positions.forEach(i => {
-        if (i === randomPosition) return
-        const random = generateRandomNumber()
-        // prevent same option twice
-        optionsItems[i] = !optionsItems.includes(random) 
-          ? random 
-          : generateRandomNumber() // or 1, 100
+      positions.forEach((i, index) => {
+        if (i !== randomPosition) {
+          const option = generateOtherOptions(signal*1)
+          // prevent same option twice
+          optionsItems[i] = !optionsItems.includes(option) 
+            ? option 
+            : generateOtherOptions(signal*2)
+
+          signal = signal < 0 ? +1 : -1
+          
+          // console.log('signal', signal);
+          // console.log('signal*1', signal*1);
+          // console.log('signal*2', signal*2);
+          
+        }
       })
       // remove null options
       optionsItems = optionsItems.filter(i => i != null)
@@ -175,6 +186,10 @@ export default {
       
       // increment rounds
       this.currentRound++
+    },
+
+    generateOtherOptions(index) {
+      return this.number1 * (this.number2 + ( index ))
     },
 
     refreshTable() {
