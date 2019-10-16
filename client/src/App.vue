@@ -1,39 +1,20 @@
 <template>
   <v-app>
-    <v-app-bar app>
+    <v-app-bar app elevate-on-scroll>
       <v-toolbar-title class="title text-uppercase">
         <span>Aprenda</span>
         <!-- <span class="font-weight-light">FOLIO</span> -->
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <div v-if="isLoggedIn">
-         <v-avatar color="indigo" size="36">
-          <v-icon class="white--text" dark>fa fa-user</v-icon>
-        </v-avatar>
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <span v-on="on" @click="() => { showProfile = true; showLogin = false }" class="mr-2 ml-2 text-capitalize">{{ getFirstName }}</span>
-          </template>
-          <span>Perfil</span>
-        </v-tooltip>
-        <v-tooltip bottom>
-          <template v-slot:activator="{on}">
-            <v-icon v-on="on"  @click="logout" class="red--text ml-4 mr-3 lighten-1" size="20">fas fa-power-off</v-icon>
-          </template>
-          <span>Sair</span>
-        </v-tooltip>
-      </div>
-      <v-btn v-else text>
-        <!-- play or login -->
-        <span class="mr-2 ml-2" @click="showLogin = !showLogin">
-          <span v-if="showLogin">
-            <v-icon class="mr-2 mb-1">fas fa-gamepad</v-icon> Jogar
-          </span>
-          <span v-else>
-            <v-icon class="mr-2 mb-1">fas fa-sign-in-alt</v-icon> Login
-          </span>
-        </span>
-      </v-btn>
+      <Menu 
+        @showProfile="() => { showProfile = true; showLogin = false }"
+        @showLogin="showLogin = !showLogin"
+        @logout="logout"
+        :showLogin="showLogin"
+        :isLoggedIn="isLoggedIn"
+        :playerName="loggedPlayer"
+      />
+      <!-- <ResponsiveMenu id="barsIcon" /> -->
     </v-app-bar>
 
     <v-container style="height: 570px;">
@@ -84,6 +65,8 @@ import LoginCard from './components/LoginCard'
 import TabuadasRepository from './repository/TabuadasRepository'
 import Profile from './components/Profile'
 import Footer from './components/Footer'
+import ResponsiveMenu from './components/ResponsiveMenu'
+import Menu from './components/Menu'
 
 export default {
   components: {
@@ -91,7 +74,9 @@ export default {
     Ranking,
     LoginCard,
     Profile,
-    Footer
+    Footer,
+    ResponsiveMenu,
+    Menu
   },
   mounted() {
     this.load()
@@ -248,11 +233,6 @@ export default {
     toggleSnack(data) {
       this.snack = data
     }
-  },
-  computed: {
-    getFirstName() {
-      return this.loggedPlayer.name.split(' ')[0]
-    }
   }
 }
 </script>
@@ -260,14 +240,6 @@ export default {
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
-  }
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
   }
 
 /* Animações de entrada e saída podem utilizar diferentes  */
@@ -282,5 +254,16 @@ export default {
   /* .slide-fade-leave-active em versões anteriores a 2.1.8 */ {
     transform: translateX(10px);
     opacity: 0;
+  }
+
+  @media (max-width: 600px) {
+    div#menuBar {
+      display: none;
+    }
+
+    i#barsIcon {
+      cursor: pointer;
+      display: flex;
+    }
   }
 </style>
