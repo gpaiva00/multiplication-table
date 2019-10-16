@@ -1,5 +1,5 @@
 <template>
-<v-container class="mt-12">
+<v-container class="my-12">
   <transition name="slide-fade" mode="out-in">
     <Login v-if="!showCreateAccount" @showAccount="showCreateAccount = true" @loginIn="validateLogin"/>
     <CreateAccount v-else @showLogin="showCreateAccount = false" @createAccount="player => $emit('createAccount', player)"/>

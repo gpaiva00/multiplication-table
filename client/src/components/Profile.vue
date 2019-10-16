@@ -1,5 +1,5 @@
 <template>
-  <v-card width="400" class="mx-auto justify-center mt-12">
+  <v-card width="400" class="mx-auto my-12">
     <v-card-title>Perfil</v-card-title>
     <v-card-text>
       <v-row>
