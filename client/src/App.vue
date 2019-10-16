@@ -7,6 +7,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <Menu 
+        id="menuBar"
         @showProfile="() => { showProfile = true; showLogin = false }"
         @showLogin="showLogin = !showLogin"
         @logout="logout"
@@ -14,7 +15,15 @@
         :isLoggedIn="isLoggedIn"
         :playerName="loggedPlayer"
       />
-      <!-- <ResponsiveMenu id="barsIcon" /> -->
+      <ResponsiveMenu 
+        id="responsiveMenu" 
+        @showProfile="() => { showProfile = true; showLogin = false }"
+        @showLogin="showLogin = !showLogin"
+        @logout="logout"
+        :showLogin="showLogin"
+        :isLoggedIn="isLoggedIn"
+        :playerName="loggedPlayer"
+      />
     </v-app-bar>
 
     <v-container style="height: 570px;">
@@ -242,6 +251,10 @@ export default {
     overflow-x: hidden;
   }
 
+  #responsiveMenu {
+    display: none;
+  }
+
 /* Animações de entrada e saída podem utilizar diferentes  */
   /* funções de duração e de tempo.                          */
   .slide-fade-enter-active {
@@ -257,13 +270,12 @@ export default {
   }
 
   @media (max-width: 600px) {
-    div#menuBar {
+    #menuBar {
       display: none;
     }
 
-    i#barsIcon {
-      cursor: pointer;
-      display: flex;
+    #responsiveMenu {
+      display: inherit;
     }
   }
 </style>
