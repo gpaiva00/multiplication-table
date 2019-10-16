@@ -1,12 +1,19 @@
 <template>
   <v-card width="400" class="mx-auto mt-12">
     <v-card-title>
-      <v-badge class="mx-auto" color="purple" left>
-        <template v-slot:badge>
-          <span>{{score}}</span>
-        </template>
-        <span color="grey lighten-1">Acertos</span>
-      </v-badge>
+      <!-- <v-row class="ma-0 pa-0"> -->
+        <v-col cols="6" class="pa-0">
+          <v-badge class="float-left ml-5" color="purple" left>
+            <template v-slot:badge>
+              <span>{{score}}</span>
+            </template>
+            <span color="grey lighten-1">Acertos</span>
+          </v-badge>
+        </v-col>
+        <v-col cols="6" class="pa-0">
+          <span class="overline float-right align-center"> Nível: {{ getUserDifficult }}</span>
+        </v-col>
+      <!-- </v-row> -->
     </v-card-title>
     <v-card-text>
       <v-divider></v-divider>
