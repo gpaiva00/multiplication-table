@@ -203,11 +203,11 @@ export default {
     },
 
     gameOver() {
+      //show final result and refresh score
+      this.$emit('gameOver', this.getScoreAndRounds)
+      
       this.resetAll()
       
-      //show final result and refresh score
-      this.$emit('gameOver', this.score)
-
     },
 
     generateRandomNumber(init = this.gameSettings.range1, limit = this.gameSettings.range2) {
@@ -277,6 +277,9 @@ export default {
     },
     getUserDifficult() {
       return localStorage.getItem('difficult')
+    },
+    getScoreAndRounds() {
+      return `${this.score} / ${this.selectedRounds}`
     }
   },
   components: {
