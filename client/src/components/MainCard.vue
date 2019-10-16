@@ -25,7 +25,7 @@
     <v-card-actions>
       <v-row class="mx-1">
         <v-col class="d-flex" cols="6" sm="6">
-          <v-select :items="roundsOptions" v-model="selectedRounds" label="Rodadas" solo></v-select>
+          <v-select :items="roundsOptions" :disabled="gameIsRunnig" v-model="selectedRounds" label="Rodadas" solo></v-select>
         </v-col>
         <v-col class="d-flex" cols="6" sm="6">
           <v-btn
