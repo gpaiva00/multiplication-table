@@ -203,6 +203,7 @@ export default {
     },
 
     startGame() {
+      if (this.selectedRounds == 0) return 
       // reset
       this.score = 0
       this.gameIsRunnig = true
@@ -268,7 +269,7 @@ export default {
       this.currentRound = 0
       this.number1 = 0
       this.number2 = 0
-      // score = 0
+      this.score = 0
       this.gameIsRunnig = false
       this.selectedRounds = 0
       this.optionsItems = []

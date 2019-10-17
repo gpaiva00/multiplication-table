@@ -26,7 +26,7 @@
       <!-- game settings -->
       <v-row>
         <v-col cols="6">
-          <p class="subtitle-2 d-flex my-5 justify-start">Dificuldade</p> 
+          <p class="subtitle-2 my-4">Dificuldade</p> 
         </v-col>
         <v-col cols="6">
           <v-select :items="difficultLevels" v-model="selectedDiffiultLevel" label="Níveis" solo></v-select>
@@ -39,7 +39,7 @@
           <v-btn block height="48px" color="secondary lighten-2" class="white--text font-weight-bold" @click="$emit('hideProfile')">Voltar</v-btn>
         </v-col>
         <v-col class="d-flex" cols="6" sm="6">
-          <v-btn :disabled="!valid" block height="48px" color="green" class="white--text font-weight-bold" @click="handleSaveProfile">Salvar</v-btn>
+          <v-btn :disabled="!valid" block height="48px" color="#7fc677" class="white--text font-weight-bold" @click="handleSaveProfile">Salvar</v-btn>
         </v-col>
       </v-row>
     </v-card-actions>
