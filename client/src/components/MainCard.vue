@@ -1,9 +1,9 @@
 <template>
-  <v-card width="400" class="mx-auto my-12">
+  <v-card width="400" class="mx-auto my-12" :raised="true" elevation="15">
     <v-card-title>
       <!-- <v-row class="ma-0 pa-0"> -->
         <v-col cols="6" class="pa-0">
-          <v-badge class="float-left ml-5" color="purple" left>
+          <v-badge class="float-left ml-5" color="#a8c878" left>
             <template v-slot:badge>
               <span>{{score}}</span>
             </template>
@@ -38,7 +38,7 @@
           <v-btn
             height="48px"
             block
-            color="green"
+            color="#7fc677"
             class="white--text font-weight-bold"
             :disabled="gameIsRunnig"
             @click="startGame"
@@ -75,7 +75,7 @@ export default {
     selectedRounds: 0,
     timerWidth: 100,
     gameIsRunnig: false,
-    timerColor: 'deep-purple accent-4',
+    timerColor: '#eda7a7',
     optionColor: 'secondary',
     optionsItems: [],
     roundsOptions: [5, 10, 20, 40],
@@ -122,6 +122,7 @@ export default {
 
       this.gameSettings = gameSettings
     },
+
     setSelectedAnswer(answer) {
       const { correctAnswer, timer } = this
 
@@ -241,7 +242,7 @@ export default {
 
       // .html((timeleft % 60))
       if (timeleft > 0) {
-        this.timerColor = 'deep-purple accent-4'
+        this.timerColor = '#eda7a7'
 
         this.timer = setTimeout(() => {
           this.resetProgressBar(timeleft - 1, timetotal)
@@ -249,7 +250,7 @@ export default {
       }
 
       if (progressBarWidth <= 30)
-        this.timerColor = 'red lighten-1'
+        this.timerColor = 'red accent-4'
     },
 
     resetTimer() {
@@ -283,7 +284,7 @@ export default {
       return (this.selectedRounds - this.currentRound) + 1
     },
     getUserDifficult() {
-      return localStorage.getItem('difficult')
+      return '_id' in this.loggedPlayer ? localStorage.getItem('difficult') : 'Fácil'
     },
     getScoreAndRounds() {
       return `${this.score} / ${this.selectedRounds}`

@@ -1,16 +1,19 @@
 <template>
-  <v-card width="400" class="mx-auto my-12">
+  <v-card width="400" class="mx-auto my-12" :raised="true" elevation="15">
     <v-card-title>Perfil</v-card-title>
     <v-card-text>
+      <v-divider></v-divider>
       <v-row>
-        <v-col cols="3">
-          <p class="subtitle-2 d-flex justify-start">Username</p> 
+        <v-col cols="6">
+          <p class="subtitle-2 ">Username</p> 
         </v-col>
-        <v-col cols="9">{{data.username}}</v-col>
+        <v-col cols="6">
+          <span class="d-flex">{{data.username}}</span>
+        </v-col>
       </v-row>
       <v-row>
         <v-col cols="6">
-          <p class="subtitle-2 d-flex my-5 justify-start">Nome</p> 
+          <p class="subtitle-2 my-4">Seu nome</p> 
         </v-col>
         <v-col cols="6">
           <v-form ref="form" v-model="valid" :lazy-validation="true">
@@ -48,7 +51,8 @@ export default {
     data: {
       type: Object,
       default: () => {}
-    }
+    },
+    cardElevation: String
   },
   mounted() {
     this.load()

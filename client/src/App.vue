@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app elevate-on-scroll>
       <v-toolbar-title class="title text-uppercase">
-        <span>Aprenda</span>
+        <span class="mx-12">Aprenda</span>
         <!-- <span class="font-weight-light">FOLIO</span> -->
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -26,14 +26,26 @@
       />
     </v-app-bar>
 
-    <v-container style="height: 570px;">
+    <v-container style="height: 570px; background-color: #FFFFFF;">
       <transition name="slide-fade" mode="out-in">
         <!-- Game -->
-        <MainCard v-if="!showLogin && !showProfile" @gameOver="gameOver" :loggedPlayer="loggedPlayer"/>
+        <MainCard 
+          v-if="!showLogin && !showProfile" 
+          @gameOver="gameOver" 
+          :loggedPlayer="loggedPlayer" />
         <!-- login/account -->
-        <LoginCard v-else-if="showLogin" @loginIn="loginIn" @invalidLogin="invalidLogin" @createAccount="createAccount" :players="playersList"/>
+        <LoginCard 
+          v-else-if="showLogin" 
+          @loginIn="loginIn" 
+          @invalidLogin="invalidLogin" 
+          @createAccount="createAccount" 
+          :players="playersList" />
         <!-- Profile -->
-        <Profile v-if="showProfile" @saveProfile="saveProfile" @hideProfile="() => { showProfile = false; showLogin = false;}" :data="loggedPlayer" />
+        <Profile 
+          v-if="showProfile" 
+          @saveProfile="saveProfile" 
+          @hideProfile="() => { showProfile = false; showLogin = false;}" 
+          :data="loggedPlayer" />
       </transition>
 
       <!-- scroll down button -->
@@ -228,6 +240,7 @@ export default {
         show: true,
         text: 'Nome de usuário ou senha inválidos',
         type: 'warning',
+        // color: '#5D534E',
         timeout: 3000
       })
     },
@@ -246,6 +259,18 @@ export default {
 }
 </script>
 <style>
+
+#app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* background-color:  */
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+    background-color: #FFFFFF;
+  }
+
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;

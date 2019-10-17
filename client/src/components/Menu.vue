@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isLoggedIn">
+  <div v-if="isLoggedIn" class="mx-12">
     <v-avatar color="secondary" size="36">
       <v-icon class="white--text" dark>fa fa-user</v-icon>
     </v-avatar>
@@ -8,7 +8,7 @@
         <span
           v-on="on"
           @click="$emit('showProfile')"
-          class="mr-2 ml-2 text-capitalize"
+          class="mr-8 ml-2 text-capitalize"
         >{{ getFirstName }}</span>
       </template>
       <span>Perfil</span>
@@ -25,7 +25,7 @@
       <span>Sair</span>
     </v-tooltip>
   </div>
-  <v-btn v-else text>
+  <v-btn v-else text class="mx-12">
     <!-- play or login -->
     <span class="mr-2 ml-2" @click="$emit('showLogin')">
       <span v-if="showLogin">
@@ -68,13 +68,5 @@ export default {
 </script>
 
 <style>
-#app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    /* background-color:  */
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  }
+
 </style>

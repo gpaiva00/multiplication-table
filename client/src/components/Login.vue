@@ -1,5 +1,5 @@
 <template>
-  <v-card width="400" class="mx-auto">
+  <v-card width="400" class="mx-auto" :raised="true" elevation="15">
     <v-card-title>
       <span color="grey lighten-1">Entrar</span>
     </v-card-title>
@@ -16,10 +16,10 @@
     <v-card-actions>
       <v-row class="mx-1">
         <v-col class="d-flex" cols="6" sm="6">
-          <v-btn block height="48px" color="primary lighten-2" class="white--text font-weight-bold" @click="$emit('showAccount')">Criar conta</v-btn>
+          <v-btn block height="48px" color="blue lighten-2" class="white--text font-weight-bold" @click="$emit('showAccount')">Criar conta</v-btn>
         </v-col>
         <v-col class="d-flex" cols="6" sm="6">
-          <v-btn block height="48px" :disabled="!valid" color="green" class="white--text font-weight-bold" @click="handleLoginIn">Entrar</v-btn>
+          <v-btn block height="48px" :disabled="!valid" color="#7fc677" class="white--text font-weight-bold" @click="handleLoginIn">Entrar</v-btn>
         </v-col>
       </v-row>
     </v-card-actions>

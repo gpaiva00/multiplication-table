@@ -84,7 +84,9 @@ export default {
     },
     playerName: {
       type: Object,
-      default: () => {}
+      default: () => ({
+        name: ''
+      })
     }
   },
   data: () => ({

@@ -1,5 +1,5 @@
 <template>
-  <v-card width="400" class="mx-auto">
+  <v-card width="400" class="mx-auto" :raised="true" elevation="15">
     <v-card-title>
       <span color="grey lighten-1">Criar conta</span>
     </v-card-title>
@@ -24,7 +24,7 @@
           <v-btn
             block
             height="48px"
-            color="primary lighten-2"
+            color="blue lighten-2"
             class="white--text font-weight-bold"
             @click="$emit('showLogin')"
           >Login</v-btn>
@@ -34,7 +34,7 @@
             block
             height="48px"
             :disabled="!valid"
-            color="green"
+            color="#7fc677"
             class="white--text font-weight-bold"
             @click="createAccount"
           >Criar</v-btn>
