@@ -60,7 +60,8 @@ export default {
     loggedPlayer: {
       type: Object,
       default: () => {}
-    }
+    },
+    isLoggedIn: Boolean
   },
   mounted() {
     this.load()
@@ -285,7 +286,7 @@ export default {
       return (this.selectedRounds - this.currentRound) + 1
     },
     getUserDifficult() {
-      return '_id' in this.loggedPlayer ? localStorage.getItem('difficult') : 'Fácil'
+      return this.isLoggedIn == true ? localStorage.getItem('difficult') : 'Fácil'
     },
     getScoreAndRounds() {
       return `${this.score} / ${this.selectedRounds}`

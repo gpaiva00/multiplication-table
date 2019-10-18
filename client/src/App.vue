@@ -6,6 +6,7 @@
         <!-- <span class="font-weight-light">FOLIO</span> -->
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      
       <Menu 
         id="menuBar"
         @showProfile="() => { showProfile = true; showLogin = false }"
@@ -32,7 +33,8 @@
         <MainCard 
           v-if="!showLogin && !showProfile" 
           @gameOver="gameOver" 
-          :loggedPlayer="loggedPlayer" />
+          :loggedPlayer="loggedPlayer"
+          :isLoggedIn="isLoggedIn" />
         <!-- login/account -->
         <LoginCard 
           v-else-if="showLogin" 
@@ -121,11 +123,15 @@ export default {
   }),
   methods: {
     async load() {
-      // if logged in
-      if(localStorage.getItem('username'))
-        this.loginIn({alreadyLoggedIn: true})
 
       await this.getPlayersList()
+
+      // if logged in
+      if(localStorage.getItem('username')) {
+        const player = this.playersList.find(p => p.username == localStorage.getItem('username'))
+
+        this.loginIn({ player, alreadyLoggedIn: true })
+      }
     },
     async getPlayersList() {
       this.rankingLoading = true
