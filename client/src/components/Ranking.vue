@@ -37,7 +37,7 @@
               <td class="text-left">{{ index+1 }}</td>
               <td class="text-left">{{ item.name }}</td>
               <td class="text-left">{{ item.username }}</td>
-              <td class="text-left">{{ item.score }}</td>
+              <td class="text-left">{{ `${item.score} / ${item.rounds}` }}</td>
               <td class="text-left">{{ item.difficult }}</td>
             </tr>
           </tbody>
@@ -57,8 +57,6 @@ export default {
     loading: { type: Boolean, default: true },
     isLoggedIn: {type: Boolean},
     username: {type: String}
-  },
-  computed: {
   }
 }
 </script>

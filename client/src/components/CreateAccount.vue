@@ -72,7 +72,8 @@ export default {
         name: this.name,
         username: this.username,
         password: this.password,
-        score: 0
+        score: 0,
+        rounds: 0
       }
       this.$emit('createAccount', player)
     }

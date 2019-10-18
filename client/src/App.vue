@@ -152,7 +152,7 @@ export default {
     async getPlayersList() {
       this.rankingLoading = true;
       const players = await TabuadasRepository.getPlayers();
-      this.playersList = players;
+      this.playersList = this.sortPlayers(players);
       this.rankingLoading = false;
     },
     async createAccount(player) {
@@ -188,10 +188,10 @@ export default {
 
       this.isLoading = false
     },
-    async gameOver(score) {
+    async gameOver({score, rounds}) {
       this.toggleSnack({
         show: true,
-        text: `Você acertou <b>${score} vezes!</b> Parabéns!`,
+        text: `Você acertou <b>${score} / ${rounds} vezes!</b> Parabéns!`,
         color: "success",
         closeButtonColor: "white",
         timeout: 5000
@@ -201,6 +201,7 @@ export default {
       if (this.isLoggedIn) {
         const player = this.loggedPlayer;
         player.score = score;
+        player.rounds = rounds
         player.difficult = localStorage.getItem("difficult");
 
         await TabuadasRepository.updatePlayer(player._id, player);
@@ -279,6 +280,15 @@ export default {
         // color: '#5D534E',
         timeout: 3000
       });
+    },
+    sortPlayers(players) {
+      return players.sort((a, b) => parseInt(b.score) - parseInt(a.score));
+    },
+    compare(a,b) {
+      // if(a.score < b.score) return -1
+      // if(a.score > b.score) return 1
+      return a.score.localeCompare(b.score)
+      // return 0
     },
     toggleSnack(data) {
       this.snack = data;

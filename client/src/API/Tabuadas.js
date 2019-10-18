@@ -7,5 +7,5 @@ export default {
   createPlayer: async (player) => axios.post(route, player).then(res => res.data),
   updatePlayer: async (id, player) => axios.put(route+`/${id}`, player).then(res => res.data),
   deletePlayer: async (id) => axios.delete(route+`/${id}`).then(res => res.data),
-  getPlayers: async () => axios.get(`${route}?limit=1000&sort=name`).then(res => res.data)
+  getPlayers: async () => axios.get(`${route}?limit=1000`).then(res => res.data)
 }

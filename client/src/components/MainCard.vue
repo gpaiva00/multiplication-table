@@ -214,7 +214,7 @@ export default {
 
     gameOver() {
       //show final result and refresh score
-      this.$emit('gameOver', this.getScoreAndRounds)
+      this.$emit('gameOver', { score: this.score, rounds: this.selectedRounds })
       
       this.resetAll()
       
