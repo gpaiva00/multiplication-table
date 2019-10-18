@@ -33,11 +33,14 @@
           <v-btn
             block
             height="48px"
-            :disabled="!valid"
+            :disabled="!valid || isLoading"
             color="#7fc677"
             class="white--text font-weight-bold"
             @click="createAccount"
-          >Criar</v-btn>
+          >
+            <span v-if="!isLoading">Criar</span>
+            <v-progress-circular v-else indeterminate color="secondary" class="my-auto" size="20"></v-progress-circular>
+          </v-btn>
         </v-col>
       </v-row>
     </v-card-actions>
@@ -45,6 +48,9 @@
 </template>
 <script>
 export default {
+  props: {
+    isLoading: Boolean
+  },
   data: () => ({
     name: "",
     username: "",

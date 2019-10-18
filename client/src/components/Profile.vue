@@ -5,7 +5,7 @@
       <v-divider></v-divider>
       <v-row>
         <v-col cols="6">
-          <p class="subtitle-2 ">Username</p> 
+          <p class="subtitle-2">Username</p>
         </v-col>
         <v-col cols="6">
           <span class="d-flex">{{data.username}}</span>
@@ -13,7 +13,7 @@
       </v-row>
       <v-row>
         <v-col cols="6">
-          <p class="subtitle-2 my-4">Seu nome</p> 
+          <p class="subtitle-2 my-4">Seu nome</p>
         </v-col>
         <v-col cols="6">
           <v-form ref="form" v-model="valid" :lazy-validation="true">
@@ -26,7 +26,7 @@
       <!-- game settings -->
       <v-row>
         <v-col cols="6">
-          <p class="subtitle-2 my-4">Dificuldade</p> 
+          <p class="subtitle-2 my-4">Dificuldade</p>
         </v-col>
         <v-col cols="6">
           <v-select :items="difficultLevels" v-model="selectedDiffiultLevel" label="Níveis" solo></v-select>
@@ -36,10 +36,26 @@
     <v-card-actions>
       <v-row class="mx-1">
         <v-col class="d-flex" cols="6" sm="6">
-          <v-btn block height="48px" color="secondary lighten-2" class="white--text font-weight-bold" @click="$emit('hideProfile')">Voltar</v-btn>
+          <v-btn
+            block
+            height="48px"
+            color="secondary lighten-2"
+            class="white--text font-weight-bold"
+            @click="$emit('hideProfile')"
+          >Voltar</v-btn>
         </v-col>
         <v-col class="d-flex" cols="6" sm="6">
-          <v-btn :disabled="!valid" block height="48px" color="#7fc677" class="white--text font-weight-bold" @click="handleSaveProfile">Salvar</v-btn>
+          <v-btn
+            :disabled="!valid || isLoading"
+            block
+            height="48px"
+            color="#7fc677"
+            class="white--text font-weight-bold"
+            @click="handleSaveProfile"
+          >
+            <span v-if="!isLoading">Salvar</span>
+            <v-progress-circular v-else indeterminate color="secondary" class="my-auto" size="20"></v-progress-circular>
+          </v-btn>
         </v-col>
       </v-row>
     </v-card-actions>
@@ -52,34 +68,35 @@ export default {
       type: Object,
       default: () => {}
     },
-    cardElevation: String
+    cardElevation: String,
+    isLoading: Boolean
   },
   mounted() {
-    this.load()
+    this.load();
   },
   data: () => ({
-    name: '',
-    selectedDiffiultLevel: '',
+    name: "",
+    selectedDiffiultLevel: "",
     valid: false,
-    difficultLevels: ['Fácil', 'Médio', 'Difícil', 'Jedi'],
-    nameRules: [v => !!v || "Digite seu nome"],
+    difficultLevels: ["Fácil", "Médio", "Difícil", "Jedi"],
+    nameRules: [v => !!v || "Digite seu nome"]
   }),
 
   methods: {
     load() {
-      this.name = this.data.name
-      this.selectedDiffiultLevel = this.data.difficult || ''
+      this.name = this.data.name;
+      this.selectedDiffiultLevel = this.data.difficult || "";
     },
     handleSaveProfile() {
-      this.$emit('saveProfile', {
+      this.$emit("saveProfile", {
         _id: this.data._id,
         name: this.name
-      })
+      });
 
-      localStorage.setItem('difficult', this.selectedDiffiultLevel)
+      localStorage.setItem("difficult", this.selectedDiffiultLevel);
     }
   },
 
   computed: {}
-}
+};
 </script>

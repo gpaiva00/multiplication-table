@@ -2,7 +2,11 @@
 <v-container class="my-12">
   <transition name="slide-fade" mode="out-in">
     <Login v-if="!showCreateAccount" @showAccount="showCreateAccount = true" @loginIn="validateLogin"/>
-    <CreateAccount v-else @showLogin="showCreateAccount = false" @createAccount="player => $emit('createAccount', player)"/>
+    <CreateAccount 
+      v-else 
+      @showLogin="showCreateAccount = false" 
+      @createAccount="player => $emit('createAccount', player)" 
+      :isLoading="isLoading" />
   </transition>
 </v-container>
 </template>
@@ -14,7 +18,8 @@ export default {
     players: {
       type: Array,
       default: () => []
-    }
+    },
+    isLoading: Boolean
   },
   components: {
     Login,
