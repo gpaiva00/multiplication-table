@@ -57,11 +57,19 @@
           <v-icon v-else dark>fas fa-chevron-up</v-icon>
         </v-btn>
       </div> -->
-    </v-container>
-    <!-- Ranking -->
-    <Ranking @refresh="getPlayersList" class="mt-12" :players="playersList" :loading="rankingLoading" :isLoggedIn="isLoggedIn" :username="loggedUsernameAccount" />
 
-    <Footer />
+     
+    </v-container>
+    <v-container>
+      <!-- Ranking -->
+      <Ranking
+      @refresh="getPlayersList" 
+      class="mt-12" 
+      :players="playersList" 
+      :loading="rankingLoading" 
+      :isLoggedIn="isLoggedIn" 
+      :username="loggedUsernameAccount" />
+    </v-container>
     <!-- snackbar -->
     <div class="text-center ma-2">
       <v-snackbar
@@ -79,6 +87,8 @@
         </v-btn>
       </v-snackbar>
     </div>
+
+    <Footer />
   </v-app>
 </template>
 <script>

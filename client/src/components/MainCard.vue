@@ -10,7 +10,7 @@
             <span color="grey lighten-1">Acertos</span>
           </v-badge>
         </v-col>
-        <v-col cols="6" class="pa-0">
+        <v-col v-if="getUserDifficult.length" cols="6" class="pa-0">
           <span class="overline float-right align-center"> Nível: {{ getUserDifficult }}</span>
         </v-col>
       <!-- </v-row> -->
