@@ -33,7 +33,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in players" :key="item.username" :class="{activeRow: isLoggedIn && (item.username == username)}">
+            <tr v-for="(item, index) in players" :key="item.username+index" :class="{activeRow: isLoggedIn && (item.username == username)}">
               <td class="text-left">{{ index+1 }}</td>
               <td class="text-left">{{ item.name }}</td>
               <td class="text-left">{{ item.username }}</td>

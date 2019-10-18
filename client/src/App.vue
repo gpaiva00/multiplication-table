@@ -26,50 +26,56 @@
         :playerName="loggedPlayer"
       />
     </v-app-bar>
-
-    <v-container style="height: 570px; background-color: #FFFFFF;">
-      <transition name="slide-fade" mode="out-in">
-        <!-- Game -->
-        <MainCard 
-          v-if="!showLogin && !showProfile" 
-          @gameOver="gameOver" 
-          :loggedPlayer="loggedPlayer"
-          :isLoggedIn="isLoggedIn" />
-        <!-- login/account -->
-        <LoginCard 
-          v-else-if="showLogin" 
-          @loginIn="loginIn" 
-          @invalidLogin="invalidLogin" 
-          @createAccount="createAccount" 
-          :players="playersList" />
-        <!-- Profile -->
-        <Profile 
-          v-if="showProfile" 
-          @saveProfile="saveProfile" 
-          @hideProfile="() => { showProfile = false; showLogin = false;}" 
-          :data="loggedPlayer" />
-      </transition>
-
-      <!-- scroll down button -->
-      <!-- <div class="text-center" style="margin-top: 100px;">
-        <v-btn @click="scrollToRanking(scrolledToRanking)" class="mx-2" fab dark large color="primary">
-          <v-icon v-if="!scrolledToRanking" dark>fas fa-chevron-down</v-icon>
-          <v-icon v-else dark>fas fa-chevron-up</v-icon>
-        </v-btn>
-      </div> -->
-
-     
-    </v-container>
-    <v-container>
-      <!-- Ranking -->
-      <Ranking
-      @refresh="getPlayersList" 
-      class="mt-12" 
-      :players="playersList" 
-      :loading="rankingLoading" 
-      :isLoggedIn="isLoggedIn" 
-      :username="loggedUsernameAccount" />
-    </v-container>
+    
+    <!-- <div id="main" class="scroll-container"> -->
+      <v-container style="height: 570px; background-color: #FFFFFF;">
+        <!-- <section> -->
+          <transition name="slide-fade" mode="out-in">
+            <!-- Game -->
+            <MainCard 
+              v-if="!showLogin && !showProfile" 
+              id="mainCard"
+              @gameOver="gameOver" 
+              :loggedPlayer="loggedPlayer"
+              :isLoggedIn="isLoggedIn" />
+            <!-- login/account -->
+            <LoginCard 
+              v-else-if="showLogin" 
+              @loginIn="loginIn" 
+              @invalidLogin="invalidLogin" 
+              @createAccount="createAccount" 
+              :players="playersList" />
+            <!-- Profile -->
+            <Profile 
+              v-if="showProfile" 
+              @saveProfile="saveProfile" 
+              @hideProfile="() => { showProfile = false; showLogin = false;}" 
+              :data="loggedPlayer" />
+          </transition>
+        <!-- </section> -->
+        <!-- scroll down button -->
+        <!-- <div class="text-center" style="margin-top: 100px;">
+          <v-btn @click="scrollToRanking(scrolledToRanking)" class="mx-2" fab dark large color="primary">
+            <v-icon v-if="!scrolledToRanking" dark>fas fa-chevron-down</v-icon>
+            <v-icon v-else dark>fas fa-chevron-up</v-icon>
+          </v-btn>
+        </div> -->
+      </v-container>
+      
+      <v-container>
+        <!-- <section> -->
+          <!-- Ranking -->
+          <Ranking
+          @refresh="getPlayersList" 
+          id="ranking"
+          class="mt-12" 
+          :players="playersList" 
+          :loading="rankingLoading" 
+          :isLoggedIn="isLoggedIn" 
+          :username="loggedUsernameAccount" />
+        <!-- </section> -->
+      </v-container>
+    <!-- </div> -->
     <!-- snackbar -->
     <div class="text-center ma-2">
       <v-snackbar
@@ -100,6 +106,8 @@ import Profile from './components/Profile'
 import Footer from './components/Footer'
 import ResponsiveMenu from './components/ResponsiveMenu'
 import Menu from './components/Menu'
+// import fullScroll from './assets/full-page-scroll.js'
+// var fullScroll = require('./assets/full-page-scroll.js')
 
 export default {
   components: {
@@ -113,6 +121,7 @@ export default {
   },
   mounted() {
     this.load()
+
   },
   data: () => ({
     showLogin: false,
@@ -260,14 +269,6 @@ export default {
         timeout: 3000
       })
     },
-    scrollToRanking(scrolledToRanking) {
-      if(!scrolledToRanking)
-        window.scrollTo(0, 500)
-      else 
-        window.scrollTo(0, 0)
-
-      this.scrolledToRanking = !scrolledToRanking
-    },
     toggleSnack(data) {
       this.snack = data
     }
@@ -275,7 +276,7 @@ export default {
 }
 </script>
 <style>
-
+/* @import url('./assets/full-page-scroll.css'); */
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
