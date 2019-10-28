@@ -277,7 +277,7 @@ export default {
       this.highlightItem = -1
 
       // reset timer
-      this.timerColor = 'deep-purple accent-4'   
+      this.timerColor = '#eda7a7'   
       this.timerWidth = 100 
     }
   },
