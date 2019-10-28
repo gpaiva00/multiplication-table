@@ -11,7 +11,7 @@
           </v-badge>
         </v-col>
         <v-col v-if="getUserDifficult.length" cols="6" class="pa-0">
-          <span class="overline float-right align-center"> Nível: {{ getUserDifficult }}</span>
+          <span class="overline font-weight-bold float-right align-center"> Nível: {{ getUserDifficult }}</span>
         </v-col>
       <!-- </v-row> -->
     </v-card-title>
