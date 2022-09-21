@@ -14,7 +14,7 @@
     "vue-router": "^3.0.3",
     "@fortawesome/fontawesome-free": "^5.8.2",
     "roboto-fontface": "*",
-    "vuetify": "^2.0.0"
+    "vuetify": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
